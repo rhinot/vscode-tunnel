@@ -1,0 +1,17 @@
+# .gitignore file
+
+# VS Code Tunnel data
+.vscode-data/
+vscode-data/
+data/
+
+# Environment files
+.env
+.env.local
+.env*.local
+
+# Docker build cache
+.dockerignore
+
+# Optional: Log files
+*.log

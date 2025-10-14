@@ -1,0 +1,25 @@
+services:
+  vscode-tunnel:
+    build: .
+    container_name: vscode-tunnel
+    restart: unless-stopped
+    environment:
+      # Tunnel name - uses .env value or defaults to "vscode-tunnel"
+      - TUNNEL_NAME=${TUNNEL_NAME:vscode-tunnel}
+    user: "vscode"
+    volumes:
+      # Single root data path with subdirectories for CLI and Server data
+      # HOST: ${VSCODE_DATA_PATH}/.vscode-cli -> CONTAINER: /home/vscode/.vscode-cli
+      # Persists: authentication tokens, tunnel configuration, CLI settings
+      - ${VSCODE_DATA_PATH:-./vscode-data}/.vscode-cli:/home/vscode/.vscode-cli
+      
+      # HOST: ${VSCODE_DATA_PATH}/.vscode-server -> CONTAINER: /home/vscode/.vscode-server  
+      # Persists: extensions, user settings, server binaries, workspace data
+      - ${VSCODE_DATA_PATH:-./vscode-data}/.vscode-server:/home/vscode/.vscode-server
+     
+      # Access local repos to be able to manipulate code
+      - ${VSCODE_REPOS}:/home/vscode/projects
+
+# volumes:
+  # Note: We're using bind mounts instead of named volumes for transparency
+  # This allows easy access to the data on the host file system
