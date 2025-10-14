@@ -22,8 +22,9 @@ RUN useradd -m -s /bin/bash vscode
 USER vscode
 WORKDIR /home/vscode
 
-# Download VS Code CLI for ARM64 (M-series Macs)
-# Using official VS Code download endpoint - stable Alpine ARM64 build
+# Download VS Code CLI for the appropriate architecture
+# Only able to use builds available at official VS Code download endpoint
+# x86 and arm64 (e.g. M-series Macs) only have alpine version available, where armhf has linux
 RUN ARCH="$(uname -m)"; case "$ARCH" in "x86_64") VARIANT="alpine-x64";; \
     "aarch64") VARIANT="alpine-arm64";; "armv7l") VARIANT="linux-armhf";; \
     *) exit 1;; esac \
