@@ -3,6 +3,9 @@
 # VS Code Tunnel Startup Script
 # This script handles the GitHub device authentication flow and tunnel persistence
 
+# Ensure projects directory is writable in container (safe - only affects container filesystem)
++chmod 777 /home/vscode/projects 2>/dev/null || true
+
 # Set default tunnel name if not provided
 TUNNEL_NAME="${TUNNEL_NAME:-my-tunnel}"
 
