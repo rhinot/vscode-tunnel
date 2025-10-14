@@ -39,13 +39,13 @@ RUN ARCH="$(uname -m)"; case "$ARCH" in "x86_64") VARIANT="alpine-x64";; \
 RUN mkdir -p /home/vscode/.vscode-cli/tunnels \
     && mkdir -p /home/vscode/.vscode-server
     && mkdir -p /home/vscode/projects \
-    && chmod 777 /home/vscode/projects
 
 # Add the CLI to PATH so 'code' command works
 ENV PATH="/home/vscode:${PATH}"
 
 # Copy and set up the entrypoint script
+COPY --chown=vscode:vscode docker-entrypoint.sh /home/vscode/docker-entrypoint.sh
 COPY --chown=vscode:vscode entrypoint.sh /home/vscode/entrypoint.sh
 RUN chmod +x /home/vscode/entrypoint.sh
 
-ENTRYPOINT ["/home/vscode/entrypoint.sh"]
+ENTRYPOINT ["/home/vscode/docker-entrypoint.sh"]
