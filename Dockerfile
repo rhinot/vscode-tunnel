@@ -38,6 +38,8 @@ RUN ARCH="$(uname -m)"; case "$ARCH" in "x86_64") VARIANT="alpine-x64";; \
 # These will be overwritten by bind mounts, but ensure container works without mounts
 RUN mkdir -p /home/vscode/.vscode-cli/tunnels \
     && mkdir -p /home/vscode/.vscode-server
+    && mkdir -p /home/vscode/projects \
+    && chmod 777 /home/vscode/projects
 
 # Add the CLI to PATH so 'code' command works
 ENV PATH="/home/vscode:${PATH}"
