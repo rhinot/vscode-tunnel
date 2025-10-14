@@ -24,7 +24,10 @@ WORKDIR /home/vscode
 
 # Download VS Code CLI for ARM64 (M-series Macs)
 # Using official VS Code download endpoint - stable Alpine ARM64 build
-RUN curl -L "https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-arm64" \
+RUN ARCH="$(uname -m)"; case "$ARCH" in "x86_64") VARIANT="alpine-x64";; \
+    "aarch64") VARIANT="alpine-arm64";; "armv7l") VARIANT="linux-armhf";; \
+    *) exit 1;; esac \
+    && curl -L "https://code.visualstudio.com/sha/download?build=stable&os=cli-${VARIANT}" \
     -o vscode_cli.tar.gz \
     && tar -xf vscode_cli.tar.gz -C /home/vscode/ \
     && rm vscode_cli.tar.gz \
