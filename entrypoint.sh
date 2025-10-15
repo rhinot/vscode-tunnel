@@ -3,17 +3,12 @@
 # This script handles the GitHub device authentication flow and tunnel persistence
 set -e
 
-echo "📂 Ensuring directories exist..."
-mkdir -p /home/vscode/.vscode-cli/tunnels
-mkdir -p /home/vscode/.vscode-server
-mkdir -p /home/vscode/projects
-
 export HOME=/home/vscode
 
 # Set default tunnel name if not provided
 TUNNEL_NAME="${TUNNEL_NAME:-my-tunnel}"
 
-echo "🚀 Starting VS Code Tunnel $TUNNEL_NAME as root..."
+echo "🚀 Starting VS Code Tunnel $TUNNEL_NAME..."
 
 # Check if we already have a valid authentication token
 # The token is stored in ~/.vscode-cli/tunnels/cli/session.json after successful login

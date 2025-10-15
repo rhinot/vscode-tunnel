@@ -6,6 +6,7 @@ services:
     environment:
       # Tunnel name - uses .env value or defaults to "vscode-tunnel"
       TUNNEL_NAME: ${TUNNEL_NAME:-vscode-tunnel}
+    user: root
     volumes:
       # Single root data path with subdirectories for CLI and Server data
       # HOST: ${VSCODE_DATA_PATH}/.vscode-cli -> CONTAINER: /home/vscode/.vscode-cli
@@ -17,7 +18,7 @@ services:
       - ${VSCODE_DATA_PATH:-./vscode-data}/.vscode-server:/home/vscode/.vscode-server
      
       # Access local repos to be able to manipulate code
-      - ${VSCODE_REPOS}:/home/vscode/projects
+      - /Users/ryan/repos:/home/vscode/projects
 
 # volumes:
   # Note: We're using bind mounts instead of named volumes for transparency

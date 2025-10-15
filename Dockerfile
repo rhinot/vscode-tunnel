@@ -37,14 +37,8 @@ RUN ARCH="$(uname -m)"; \
     chmod +x /opt/vscode-cli/code && \
     ln -s /opt/vscode-cli/code /usr/local/bin/code
 
-# Create directory structure that VS Code expects
-# These will be overwritten by bind mounts, but ensure container works without mounts
-RUN mkdir -p /home/vscode/.vscode-cli/tunnels \
-    /home/vscode/.vscode-server \
-    /home/vscode/projects
-
 # Add the CLI to PATH so 'code' command works
-ENV PATH="/home/vscode:${PATH}"
+ENV PATH="/opt/vscode-cli:${PATH}"
 
 # Copy and set up the entrypoint script
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
