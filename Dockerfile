@@ -28,9 +28,9 @@ RUN ARCH="$(uname -m)"; \
         "aarch64") VARIANT="alpine-arm64";; \
         "armv7l") VARIANT="linux-armhf";; \
         *) exit 1;; \
-    esac \
+    esac && \
     mkdir -p /opt/vscode-cli && \
-    && curl -L "https://code.visualstudio.com/sha/download?build=stable&os=cli-${VARIANT}" \
+    curl -L "https://code.visualstudio.com/sha/download?build=stable&os=cli-${VARIANT}" \
         -o /opt/vscode-cli/vscode_cli.tar.gz && \
     tar -xf /opt/vscode-cli/vscode_cli.tar.gz -C /opt/vscode-cli && \
     rm /opt/vscode-cli/vscode_cli.tar.gz && \
@@ -50,4 +50,5 @@ ENV PATH="/home/vscode:${PATH}"
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT ["/home/vscode/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
