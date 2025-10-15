@@ -6,7 +6,6 @@ services:
     environment:
       # Tunnel name - uses .env value or defaults to "vscode-tunnel"
       - TUNNEL_NAME=${TUNNEL_NAME:vscode-tunnel}
-    user: "vscode"
     volumes:
       # Single root data path with subdirectories for CLI and Server data
       # HOST: ${VSCODE_DATA_PATH}/.vscode-cli -> CONTAINER: /home/vscode/.vscode-cli
