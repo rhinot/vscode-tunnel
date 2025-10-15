@@ -11,14 +11,14 @@ services:
       # Single root data path with subdirectories for CLI and Server data
       # HOST: ${VSCODE_DATA_PATH}/.vscode-cli -> CONTAINER: /home/vscode/.vscode-cli
       # Persists: authentication tokens, tunnel configuration, CLI settings
-      - ${VSCODE_DATA_PATH:-./vscode-data}/.vscode-cli:/home/vscode/.vscode-cli
+      - ${VSCODE_DATA_PATH:-./vscode-data}/.vscode-cli:/home/vsdcode/.vscode-cli
       
       # HOST: ${VSCODE_DATA_PATH}/.vscode-server -> CONTAINER: /home/vscode/.vscode-server  
       # Persists: extensions, user settings, server binaries, workspace data
       - ${VSCODE_DATA_PATH:-./vscode-data}/.vscode-server:/home/vscode/.vscode-server
      
       # Access local repos to be able to manipulate code
-      - /Users/ryan/repos:/home/vscode/projects
+      - ${VSCODE_REPOS}:/home/vscode/projects
 
 # volumes:
   # Note: We're using bind mounts instead of named volumes for transparency
